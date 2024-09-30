@@ -14,8 +14,10 @@ app.MapPost("/upload", async (HttpContext context) =>
 			try
 			{
 				var caminhoArquivo = Path.Combine("uploads", arquivo.FileName);
-				var stream = new FileStream(caminhoArquivo, FileMode.Create);
-				await arquivo.CopyToAsync(stream);
+				using (var stream = new FileStream(caminhoArquivo, FileMode.Create))
+				{
+					await arquivo.CopyToAsync(stream);
+				}
 
 			}
 			catch (Exception ex)
