@@ -25,7 +25,7 @@ app.MapPost("/upload", async (HttpContext context) =>
 
 		}
 	}
-	return Results.Ok(new { message = "Arquivo enviado com sucesso!" });
+	return Results.Ok(new { totalArquivos = arquivos.Count, tamanhoBytes = arquivos.Sum(arquivo => arquivo.Length) });
 });
 
 app.Run();
