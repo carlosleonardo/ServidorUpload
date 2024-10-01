@@ -1,7 +1,15 @@
 
 var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
 
+builder.Services.AddCors(options =>
+{
+	options.AddPolicy("UploadPermissions", builder =>
+	{
+		builder.WithOrigins(["http://localhost:4200"]);
+	});
+});
+var app = builder.Build();
+app.UseCors("UploadPermissions");
 
 app.MapPost("/upload", async (HttpContext context) =>
 {
