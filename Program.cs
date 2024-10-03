@@ -5,7 +5,8 @@ builder.Services.AddCors(options =>
 {
 	options.AddPolicy("UploadPermissions", builder =>
 	{
-		builder.WithOrigins(["http://localhost:4200", "http://localhost:5270/"]);
+		//builder.WithOrigins("http://localhost:4200", "http://localhost:5270/").AllowAnyMethod().WithHeaders("Content-Type");
+		builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
 	});
 });
 var app = builder.Build();
